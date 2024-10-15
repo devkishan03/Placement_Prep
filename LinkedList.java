@@ -117,6 +117,115 @@ public class LinkedList {
         return size;
     }
 
+    public int maxElement() {
+        int max = Integer.MIN_VALUE;
+        Node temp = head;
+        while (temp != null) {
+            if (temp.data > max) {
+                max = temp.data;
+            }
+            temp = temp.next;
+        }
+        return max;
+    }
+
+    public int minElement() {
+        int min = Integer.MAX_VALUE;
+        Node temp = head;
+        while (temp != null) {
+            if (temp.data < min)
+                min = temp.data;
+            temp = temp.next;
+        }
+        return min;
+    }
+
+    public String searchElement(int val) {
+        int count = 0;
+        Node temp = head;
+        while (temp != null) {
+            if (temp.data == val) {
+                return val + " found in " + count + " index";
+            }
+            temp = temp.next;
+            count++;
+        }
+        return val + " not found in the List";
+    }
+
+    public Node searchElement2(int val) {
+        Node temp = head;
+        Node previous = null;
+        while (temp != null) {
+            if (temp.data == val) {
+                previous.next = temp.next;
+                temp.next = head;
+                head = temp;
+                return temp;
+            }
+            previous = temp;
+            temp = temp.next;
+
+        }
+        return null;
+    }
+
+    public void deleteByElement(int val) {
+        Node temp = head;
+        Node previous = null;
+        if (head.data == val) {
+            temp = head.next;
+            head = temp;
+            temp = null;
+            size--;
+            return;
+        }
+        while (temp != null) {
+            if (temp.data == val && temp.next == null) {
+                previous.next = null;
+                tail = previous;
+                temp = null;
+                size--;
+                return;
+            }
+            if (temp.data == val) {
+                previous.next = temp.next;
+                temp = null;
+                size--;
+                return;
+            }
+            previous = temp;
+            temp = temp.next;
+
+        }
+    }
+
+    public void deleteByIndex(int index) {
+        Node temp = head;
+        if (index >= size) {
+            System.out.println("index out of bound");
+            return;
+        }
+        if (index == 0) {
+            temp = temp.next;
+            head = temp;
+            temp = null;
+            size--;
+            return;
+        }
+        for (int i = 1; i < index; i++) {
+            temp = temp.next;
+        }
+        if (temp.next.next == null) {
+            temp.next = temp.next.next;
+            tail = temp;
+            size--;
+            return;
+        }
+        temp.next = temp.next.next;
+        size--;
+    }
+
     public void display() {
         Node temp;
         temp = head;
@@ -158,8 +267,15 @@ public class LinkedList {
         // ll2.insertAt(3, 3);
         // System.out.println(ll2.tail.data);
         ll.display();
-        System.out.println(ll.size());
-        System.out.println(ll.getAt(8));
+        // System.out.println(ll.size());
+        // System.out.println(ll.getAt(8));
+        // System.out.println(ll.maxElement());
+        // System.out.println(ll.minElement());
+        // System.out.println(ll.searchElement2(1).data);
+        // ll.deleteByElement(21);
+        ll.deleteByIndex(8);
+        ll.display();
+        System.out.println(ll.tail.data);
     }
 
 }
