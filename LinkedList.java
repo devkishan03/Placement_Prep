@@ -1,7 +1,5 @@
 package LinkedList;
 
-import java.io.FileReader;
-
 class Node {
     int data;
     Node next = null;
@@ -348,6 +346,25 @@ public class LinkedList {
 
     }
 
+    public boolean isLinear() {
+        Node temp = head;
+        while (temp != null) {
+            temp = temp.next;
+        }
+        return temp == null;
+    }
+
+    public boolean isLoop() {
+        Node temp = head;
+        Node temp2 = head;
+        while (temp != null) {
+            temp = temp.next;
+            temp2 = temp2.next.next;
+            return temp == temp2;
+        }
+        return false;
+    }
+
     public void display() {
         Node temp;
         temp = head;
@@ -357,6 +374,15 @@ public class LinkedList {
         }
         System.out.println();
 
+    }
+
+    public void displayCircularList() {
+        Node temp = head;
+        do {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        } while (temp != null || temp != head);
+        System.out.println();
     }
 
     public static void main(String[] args) {
@@ -413,6 +439,8 @@ public class LinkedList {
         ll2.display();
         ll.margeWith(ll2.head);
         ll.display();
+        System.out.println(ll.isLinear());
+        System.out.println(ll.isLoop());
         // System.out.println(ll.isSorted());
     }
 
