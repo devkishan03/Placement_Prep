@@ -330,17 +330,11 @@ public class LinkedList {
                 second = second.next;
             }
         }
-        while (first != null) {
+        if (first != null) {
             last.next = first;
-            last = first;
-            first = first.next;
 
-        }
-        while (second != null) {
+        } else {
             last.next = second;
-            last = second;
-            second = second.next;
-
         }
         head = newlist;
 
