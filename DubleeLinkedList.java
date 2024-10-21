@@ -112,6 +112,37 @@ public class DubleeLinkedList {
         size--;
     }
 
+    public void insertAt(int index, int val) {
+        if (index < 0 | index > size) {
+            System.out.println("index out of bound");
+            return;
+        }
+        if (head == null && index > 0) {
+            System.out.println("list is empty");
+            return;
+        }
+        if (index == 0) {
+            insertAtHead(val);
+            return;
+        }
+        if (index == size) {
+            insertAtEnd(val);
+            return;
+        } else {
+            Node temp = head;
+            Node temp2 = new Node(val);
+            for (int i = 1; i < index; i++) {
+                temp = temp.next;
+            }
+            temp2.next = temp.next;
+            temp2.previous = temp;
+            temp.next.previous = temp2;
+            temp.next = temp2;
+            size++;
+        }
+
+    }
+
     public static void main(String[] args) {
         int arr[] = { 1, 2, 3, 4, 5 };
         int n = 5;
@@ -134,7 +165,14 @@ public class DubleeLinkedList {
         System.out.println(dl2.size);
         dl2.display();
         // dl2.deleteHead();
-        dl2.deleteEnd();
+        // dl2.deleteEnd();
         dl2.display();
+        dl2.insertAt(0, 13);
+        dl2.display();
+        System.out.println(dl2.head.data);
+        dl.display();
+        // System.out.println(dl.size);
+        dl.insertAt(0, 10);
+        dl.display();
     }
 }
